@@ -15,13 +15,5 @@ class BaseWorldGenerator(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def more_world_options(self) -> None:
-        pass
-
-    @abc.abstractmethod
-    def exit_more_world_options(self) -> None:
-        pass
-
-    @abc.abstractmethod
     def generate_world(self) -> None:
         pass
