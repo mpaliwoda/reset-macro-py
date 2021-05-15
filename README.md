@@ -2,7 +2,7 @@
 
 ## Description
 
-This is as-multiplatform-as-I-could Python reset macro for Minecraft speedrunning. Supports Windows, Linux with X11 and MacOS (tested on Big Sur). Written for Python 3.6+.
+This is as-multiplatform-as-I-could-make-it Python reset macro for Minecraft speedrunning. Supports Windows, Linux with X11 (tested on elementaryOS Hera) and MacOS (tested on Big Sur). Written for Python 3.6+.
 
 ## Versions/Categories covered
 
