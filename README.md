@@ -28,7 +28,7 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 2. If you have git installed and know how to use it, clone the repo to preferred destination. Otherwise, click the `Code` button on project's page and then `Download ZIP`. After that, unzip it to preferred desitnation.
 3. Run `pip install -r requirements.txt` in your terminal emulator
 4. _(Optional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random.
-5. _Optional step for MacOS) I'd recommend changing keybinds in `src/config` file, as default ctrl can be a bit wonky._
+5. _Optional step for MacOS) I'd recommend changing keybinds in `src/config.py` file, as default ctrl can be a bit wonky._
 6. Run `python3 main.py` in your terminal emulator. On Linux and MacOS you need to run `sudo python3 main.py` because of inner workings of `keyboard` module.
 7. _(Optional for every platform) Change `KEY_DELAY_IN_MILISECONDS` in `src/config.py` to something higher if the macro is too fast_
 8. Start using macro. 🤷
