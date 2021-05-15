@@ -3,4 +3,5 @@ python-xlib==0.29; sys_platform == "linux"
 pywin32==300; sys_platform == "win32"
 AppKit==0.2.8; sys_platform == "darwin"
 pyobjc-framework-Quartz==7.2; sys_platform == "darwin"
-keyboard==0.13.5
+
+git+https://github.com/boppreh/keyboard
