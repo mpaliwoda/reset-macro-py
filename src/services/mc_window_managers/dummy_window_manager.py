@@ -6,5 +6,5 @@ class DummyWindowManager(BaseWindowManager):
     def is_minecraft_focused(self) -> bool:
         return True
 
-    def get_major_version(self) -> float:
+    def major_version(self) -> float:
         return float(config.active_minecraft_version)

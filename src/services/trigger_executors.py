@@ -2,17 +2,30 @@ import logging
 import os
 
 import keyboard
-from src.models.exceptions import UnsupportedVersionError
+from src.models.actions import Action
+from src.models.exceptions import FailedToRetrieveMinecraftVersion, UnsupportedVersionError
+from src.services.action_performer_selector import ActionPerformerSelector
 from src.services.mc_window_managers.base_window_manager import BaseWindowManager
-from src.services.world_generator_selector import WorldGeneratorSelector
 
 logger = logging.getLogger(__name__)
 
 
-def on_quit() -> None:
+def on_quit_macro_trigger() -> None:
     logger.info("Pressed exit, quitting now.")
     keyboard.unhook_all()
     os._exit(0)
+
+
+def on_new_rsg_world_trigger(window_manager: BaseWindowManager) -> None:
+    _perform_action(action=Action.GENERATE_RSG_WORLD, window_manager=window_manager)
+
+
+def on_new_ssg_world_trigger(window_manager: BaseWindowManager) -> None:
+    _perform_action(action=Action.GENERATE_SSG_WORLD, window_manager=window_manager)
+
+
+def on_world_exit_trigger(window_manager: BaseWindowManager) -> None:
+    _perform_action(action=Action.EXIT_WORLD, window_manager=window_manager)
 
 
 def _clear_events() -> None:
@@ -24,48 +37,18 @@ def _clear_events() -> None:
     keyboard._hotkeys.clear()
 
 
-def on_new_rsg_world_trigger(window_manager: BaseWindowManager) -> None:
+def _perform_action(action: Action, window_manager: BaseWindowManager) -> None:
     if not window_manager.is_minecraft_focused():
         return
 
-    world_generator_selector = WorldGeneratorSelector(window_manager)
-
+    action_performer_selector = ActionPerformerSelector(window_manager)
     try:
-        rsg_world_generator = world_generator_selector.select_rsg_world_generator()
+        action_performer = action_performer_selector.select_action_performer(action)
     except UnsupportedVersionError as unsupported_version_error:
-        logger.info("Looks like minecraft version you're trying to use is not supported: %s", unsupported_version_error)
+        logger.info("Looks like minecraft version you're trying to use is not supported. %s", unsupported_version_error)
+    except FailedToRetrieveMinecraftVersion as failed_to_retrieve_minecraft_version:
+        logger.info("Looks like minecraft version could not be retrieved: %s", failed_to_retrieve_minecraft_version)
     else:
-        rsg_world_generator.generate_world()
-    finally:
-        _clear_events()
-
-
-def on_new_ssg_world_trigger(window_manager: BaseWindowManager) -> None:
-    if not window_manager.is_minecraft_focused():
-        return
-
-    world_generator_selector = WorldGeneratorSelector(window_manager)
-
-    try:
-        ssg_world_generator = world_generator_selector.select_ssg_world_generator()
-    except UnsupportedVersionError as unsupported_version_error:
-        logger.info("Looks like minecraft version you're trying to use is not supported: %s", unsupported_version_error)
-    else:
-        ssg_world_generator.generate_world()
-    finally:
-        _clear_events()
-
-
-def on_world_exit(window_manager: BaseWindowManager) -> None:
-    if not window_manager.is_minecraft_focused():
-        return
-
-    world_generator_selector = WorldGeneratorSelector(window_manager)
-    try:
-        world_exiter = world_generator_selector.select_world_exiter()
-    except UnsupportedVersionError as unsupported_version_error:
-        logger.info("Looks like minecraft version you're trying to use is not supported: %s", unsupported_version_error)
-    else:
-        world_exiter.exit_world()
+        action_performer.perform_action()
     finally:
         _clear_events()

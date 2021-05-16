@@ -1,8 +1,8 @@
 import logging
 
 from simpleconf import config
+from src.services.action_performers.base_world_generator import BaseWorldGenerator
 from src.services.key_presses.keyboard_key_presser import KeyboardKeyPresser
-from src.world_generators.base_world_generator import BaseWorldGenerator
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +45,7 @@ class WorldGenerator_1_16(BaseWorldGenerator):
 
 
 class RSGGenerator(WorldGenerator_1_16):
-    def generate_world(self) -> None:
+    def perform_action(self) -> None:
         logger.info("Generating new 1.16 RSG world")
         self.single_player_menu()
         self.create_new_world_menu()
@@ -60,7 +60,7 @@ class SSGGenerator(WorldGenerator_1_16):
         self.key_presser.press("tab", times=3)
         self.key_presser.write(self.SEED)
 
-    def generate_world(self) -> None:
+    def perform_action(self) -> None:
         logger.info("Generating new 1.16 SSG world")
         self.single_player_menu()
         self.create_new_world_menu()

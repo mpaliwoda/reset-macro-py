@@ -15,8 +15,8 @@ def register_hotkeys(window_manager: BaseWindowManager) -> None:
     keyboard.add_hotkey(config.ssg_hotkey, trigger_executors.on_new_ssg_world_trigger, args=[window_manager])
     logger.info("Added %s for creating new SSG world", config.ssg_hotkey)
 
-    keyboard.add_hotkey(config.exit_world_hotkey, trigger_executors.on_world_exit, args=[window_manager])
+    keyboard.add_hotkey(config.exit_world_hotkey, trigger_executors.on_world_exit_trigger, args=[window_manager])
     logger.info("Added %s for exiting the world", config.exit_world_hotkey)
 
-    keyboard.add_hotkey(config.exit_macro_hotkey, trigger_executors.on_quit)
+    keyboard.add_hotkey(config.exit_macro_hotkey, trigger_executors.on_quit_macro_trigger)
     logger.info("Added %s for quitting the macro", config.exit_macro_hotkey)

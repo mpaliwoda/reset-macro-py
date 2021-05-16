@@ -1,7 +1,9 @@
 import abc
 
+from src.services.action_performers.base_action_performer import BaseActionPerformer
 
-class BaseWorldGenerator(abc.ABC):
+
+class BaseWorldGenerator(BaseActionPerformer):
     @abc.abstractmethod
     def single_player_menu(self) -> None:
         pass
@@ -12,8 +14,4 @@ class BaseWorldGenerator(abc.ABC):
 
     @abc.abstractmethod
     def start_new_world(self) -> None:
-        pass
-
-    @abc.abstractmethod
-    def generate_world(self) -> None:
         pass
