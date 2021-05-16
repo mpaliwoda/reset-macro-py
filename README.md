@@ -18,14 +18,14 @@ Currently covered:
 * `Ctrl + m` creates new RSG world, works for 1.14+
 * `Ctrl + k` creates new SSG world, works only in 1.16
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
-* `Ctrl + l` exits macro gracefully, although good old `Ctrl + c` works as well
+* `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
 ## Default keybinds for Linux
 
 * `Ctrl + m` creates new RSG world, works for 1.14+
 * `Ctrl + k` creates new SSG world, works only in 1.16
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
-* `Ctrl + l` exits macro gracefully, although good old `Ctrl + c` works as well
+* `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
 ## Default keybinds for MacOS
 
