@@ -10,7 +10,7 @@ from src.services.mc_window_managers.base_window_manager import BaseWindowManage
 
 
 def _select_correct_window_manager() -> BaseWindowManager:
-    if not config.check_minecraft_window_before_running_hotkey:
+    if not config.check_minecraft_window_before_executing_actions:
         return DummyWindowManager()
 
     if sys.platform == "win32":

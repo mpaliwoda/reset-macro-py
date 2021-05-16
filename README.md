@@ -53,5 +53,5 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 *If you don't want to give Screen Recording permission on MacOS or macro doesn't work on Wayland:*
 
 1. _(Optional step for Wayland users if Xlib fails to install - I don't know if it actually does, but it might 🤷)_ Remove `python-xlib==0.29; sys_platform == "linux"` line from `requirements.txt` and try to install them again.
-2. Change `check_minecraft_window_before_running_hotkey` value to `false` in `config.ini`
+2. Change `check_minecraft_window_before_executing_actions` value to `false` in `config.ini`
 3. Change `active_minecraft_version` in `config.ini` to whatever version you're currently running and restart macro. You have to do that every time you change version.
