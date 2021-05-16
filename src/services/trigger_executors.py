@@ -28,15 +28,6 @@ def on_world_exit_trigger(window_manager: BaseWindowManager) -> None:
     _perform_action(action=Action.EXIT_WORLD, window_manager=window_manager)
 
 
-def _clear_events() -> None:
-    # it's a dirty trick to circumvent the situation when the keyboard module for some reason thinks that the hotkey
-    # is being pressed and released continously in some cases - I know it's ugly but it works :(
-    keyboard._pressed_events.clear()
-    keyboard._physically_pressed_keys.clear()
-    keyboard._logically_pressed_keys.clear()
-    keyboard._hotkeys.clear()
-
-
 def _perform_action(action: Action, window_manager: BaseWindowManager) -> None:
     if not window_manager.is_minecraft_focused():
         return
@@ -52,3 +43,12 @@ def _perform_action(action: Action, window_manager: BaseWindowManager) -> None:
         action_performer.perform_action()
     finally:
         _clear_events()
+
+
+def _clear_events() -> None:
+    # it's a dirty trick to circumvent the situation when the keyboard module for some reason thinks that the hotkey
+    # is being pressed and released continously in some cases - I know it's ugly but it works :(
+    keyboard._pressed_events.clear()
+    keyboard._physically_pressed_keys.clear()
+    keyboard._logically_pressed_keys.clear()
+    keyboard._hotkeys.clear()
