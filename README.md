@@ -47,6 +47,11 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 
 # Optional steps
 
-* If for whatever reason you don't want the macro to read actively focused window title (MacOS users might want to do that because of Screen Recording permission required in order to do so, Linux users might want to do that in case they're using Wayland composer and macro doesn't work there), change value of `check_minecraft_window_before_running_hotkey` in `config.ini` file to false. This requires setting `active_minecraft_version` to whatever major version you're running currently and restarting the macro, as checking version automatically is impossible in that case.
 * In order to change keybinds, change their value in `config.ini`, under your platform section.
 * If the macro is too fast, change `key_delay_in_miliseconds`  in `config.ini` to something higher, but I wouldn't really recommend anything more than 120.
+
+*If you don't want to give Screen Recording permission on MacOS or macro doesn't work on Wayland:*
+
+1. _(Optional step for Wayland users if Xlib fails to install - I don't know if it actually does, but it might 🤷)_ Remove `python-xlib==0.29; sys_platform == "linux"` line from `requirements.txt` and try to install them again.
+2. Change `check_minecraft_window_before_running_hotkey` value to `false` in `config.ini`
+3. Change `active_minecraft_version` in `config.ini` to whatever version you're currently running and restart macro. You have to do that every time you change version.
