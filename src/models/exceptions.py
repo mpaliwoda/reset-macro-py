@@ -4,3 +4,7 @@ class UnsupportedPlatformError(Exception):
 
 class UnsupportedVersionError(Exception):
     pass
+
+
+class FailedToRetrieveMinecraftVersion(Exception):
+    pass

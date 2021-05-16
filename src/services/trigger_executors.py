@@ -3,8 +3,7 @@ import os
 
 import keyboard
 from src.models.exceptions import UnsupportedVersionError
-from src.services.mc_window_manager import MCWindowManager
-from src.services.window_title.base_window_title_fetcher import BaseWindowTitleFetcher
+from src.services.mc_window_managers.base_window_manager import BaseWindowManager
 from src.services.world_generator_selector import WorldGeneratorSelector
 
 logger = logging.getLogger(__name__)
@@ -25,13 +24,11 @@ def _clear_events() -> None:
     keyboard._hotkeys.clear()
 
 
-def on_new_rsg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> None:
-    mc_window_manager = MCWindowManager(window_title_fetcher)
-
-    if not mc_window_manager.is_minecraft_focused():
+def on_new_rsg_world_trigger(window_manager: BaseWindowManager) -> None:
+    if not window_manager.is_minecraft_focused():
         return
 
-    world_generator_selector = WorldGeneratorSelector(mc_window_manager)
+    world_generator_selector = WorldGeneratorSelector(window_manager)
 
     try:
         rsg_world_generator = world_generator_selector.select_rsg_world_generator()
@@ -43,13 +40,11 @@ def on_new_rsg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> No
         _clear_events()
 
 
-def on_new_ssg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> None:
-    mc_window_manager = MCWindowManager(window_title_fetcher)
-
-    if not mc_window_manager.is_minecraft_focused():
+def on_new_ssg_world_trigger(window_manager: BaseWindowManager) -> None:
+    if not window_manager.is_minecraft_focused():
         return
 
-    world_generator_selector = WorldGeneratorSelector(mc_window_manager)
+    world_generator_selector = WorldGeneratorSelector(window_manager)
 
     try:
         ssg_world_generator = world_generator_selector.select_ssg_world_generator()
@@ -61,13 +56,11 @@ def on_new_ssg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> No
         _clear_events()
 
 
-def on_world_exit(window_title_fetcher: BaseWindowTitleFetcher) -> None:
-    mc_window_manager = MCWindowManager(window_title_fetcher)
-
-    if not mc_window_manager.is_minecraft_focused():
+def on_world_exit(window_manager: BaseWindowManager) -> None:
+    if not window_manager.is_minecraft_focused():
         return
 
-    world_generator_selector = WorldGeneratorSelector(mc_window_manager)
+    world_generator_selector = WorldGeneratorSelector(window_manager)
     try:
         world_exiter = world_generator_selector.select_world_exiter()
     except UnsupportedVersionError as unsupported_version_error:

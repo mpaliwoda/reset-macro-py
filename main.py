@@ -5,22 +5,26 @@ import keyboard
 from simpleconf import config
 from src.models.exceptions import UnsupportedPlatformError
 from src.services import hotkey_registrator
-from src.services.window_title.base_window_title_fetcher import BaseWindowTitleFetcher
+from src.services.mc_window_managers.dummy_window_manager import DummyWindowManager
+from src.services.mc_window_managers.base_window_manager import BaseWindowManager
 
 
-def _select_correct_window_title_fetcher() -> BaseWindowTitleFetcher:
+def _select_correct_window_manager() -> BaseWindowManager:
+    if not config.check_minecraft_window_before_running_hotkey:
+        return DummyWindowManager()
+
     if sys.platform == "win32":
-        from src.services.window_title.windows_window_title_fetcher import WindowsWindowTitleFetcher
+        from src.services.mc_window_managers.windows_window_manager import WindowsWindowManager
 
-        return WindowsWindowTitleFetcher()
+        return WindowsWindowManager()
     elif sys.platform == "linux":
-        from src.services.window_title.x11_window_title_fetcher import X11WindowTitleFetcher
+        from src.services.mc_window_managers.x11_window_manager import X11WindowManager
 
-        return X11WindowTitleFetcher()
+        return X11WindowManager()
     elif sys.platform == "darwin":
-        from src.services.window_title.darwin_window_title_fetcher import DarwinWindowTitleFetcher
+        from src.services.mc_window_managers.darwin_window_manager import DarwinWindowManager
 
-        return DarwinWindowTitleFetcher()
+        return DarwinWindowManager()
     else:
         # if not any of those 3, the program will already have thrown an exception
         pass
@@ -44,9 +48,9 @@ if __name__ == "__main__":
     logger.info("Starting macro. Press %s or ctrl+c to exit", config.exit_macro_hotkey)
     logger.info("Using the delay of %s miliseconds", config.key_delay_in_miliseconds)
 
-    window_title_fetcher = _select_correct_window_title_fetcher()
-    logger.debug("Using fetcher: %s", window_title_fetcher)
+    window_manager = _select_correct_window_manager()
+    logger.debug("Using fetcher: %s", window_manager)
 
     logger.info("Registering hotkeys...")
-    hotkey_registrator.register_hotkeys(window_title_fetcher)
+    hotkey_registrator.register_hotkeys(window_manager)
     keyboard.wait()

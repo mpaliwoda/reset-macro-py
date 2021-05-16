@@ -1,16 +1,16 @@
 from AppKit import NSWorkspace
 from Quartz import CGWindowListCopyWindowInfo, kCGWindowListOptionOnScreenOnly, kCGNullWindowID
-from src.services.window_title.base_window_title_fetcher import BaseWindowTitleFetcher
+from src.services.mc_window_managers.base_window_manager import WindowTitleManager
 
 
-class DarwinWindowTitleFetcher(BaseWindowTitleFetcher):
+class DarwinWindowManager(WindowTitleManager):
     def fetch_window_title(self) -> str:
         active_app_name = NSWorkspace.sharedWorkspace().frontmostApplication().localizedName()
 
         options = kCGWindowListOptionOnScreenOnly
-        windowList = CGWindowListCopyWindowInfo(options, kCGNullWindowID)
+        window_list = CGWindowListCopyWindowInfo(options, kCGNullWindowID)
 
-        for window in windowList:
+        for window in window_list:
             if window["kCGWindowOwnerName"] == active_app_name:
                 return window.get("kCGWindowName", "Unknown")
         else:
