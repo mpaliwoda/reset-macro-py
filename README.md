@@ -45,7 +45,8 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 5. Run `python3 main.py` in your terminal emulator. On Linux and MacOS you need to run `sudo python3 main.py` because of inner workings of `keyboard` module. Can't really do anything about that, if you don't feel comfortable doing so and feel like you know a better solution to adding hotkeys, please make Pull Request or create Issue with resources pointing me in that direction.
 7. Start using macro. 🤷
 
-# Additional steps
+# Optional steps
 
 * If for whatever reason you don't want the macro to read actively focused window title (MacOS users might want to do that because of Screen Recording permission required in order to do so, Linux users might want to do that in case they're using Wayland composer and macro doesn't work there), change value of `check_minecraft_window_before_running_hotkey` in `config.ini` file to false. This requires setting `active_minecraft_version` to whatever major version you're running currently and restarting the macro, as checking version automatically is impossible in that case.
 * In order to change keybinds, change their value in `config.ini`, under your platform section.
+* If the macro is too fast, change `key_delay_in_miliseconds` to something higher, but I wouldn't really recommend anything more than 120.
