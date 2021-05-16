@@ -3,7 +3,7 @@ import logging
 import sys
 import time
 
-from src import config
+from simpleconf import config
 from src.services.key_presses.keyboard_key_presser import KeyboardKeyPresser
 
 logger = logging.getLogger(__name__)
@@ -24,15 +24,16 @@ class BaseWorldExiter(abc.ABC):
 
 
 class WorldExiter(BaseWorldExiter):
-    _DELAY_UNTIL_ESC_IS_PRESSED: float = 0.3
+    _DELAY_UNTIL_ESC_IS_PRESSED_ON_WINDOWS: float = 0.5
 
     def __init__(self) -> None:
         self.key_presser = KeyboardKeyPresser(delay_in_miliseconds=0)
 
     def pause_game(self) -> None:
         # give time to release ctrl, otherwise acts like super key was pressed on Windows
-        if sys.platform == "win32" and "ctrl" in config.EXIT_WORLD_HOTKEY.casefold():
-            time.sleep(self._DELAY_UNTIL_ESC_IS_PRESSED)
+        if sys.platform == "win32" and "ctrl" in config.exit_world_hotkey.casefold():
+            time.sleep(self._DELAY_UNTIL_ESC_IS_PRESSED_ON_WINDOWS)
+
         self.key_presser.press("esc")
 
     def save_and_quit_to_title(self) -> None:

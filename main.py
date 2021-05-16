@@ -2,13 +2,10 @@ import logging.config
 import sys
 
 import keyboard
-from src import config
+from simpleconf import config
 from src.models.exceptions import UnsupportedPlatformError
 from src.services import hotkey_registrator
 from src.services.window_title.base_window_title_fetcher import BaseWindowTitleFetcher
-
-logging.config.fileConfig(config.LOGGING_CONFIG)
-logger = logging.getLogger(__name__)
 
 
 def _select_correct_window_title_fetcher() -> BaseWindowTitleFetcher:
@@ -25,12 +22,27 @@ def _select_correct_window_title_fetcher() -> BaseWindowTitleFetcher:
 
         return DarwinWindowTitleFetcher()
     else:
-        raise UnsupportedPlatformError(f"Platform: {sys.platform} is not supported.")
+        # if not any of those 3, the program will already have thrown an exception
+        pass
 
 
 if __name__ == "__main__":
-    logger.info("Starting macro. Press %s or ctrl+c to exit", config.EXIT_MACRO_HOTKEY)
-    logger.info("Using the delay of %s miliseconds", config.KEY_DELAY_IN_MILISECONDS)
+    config._load("config.ini")
+
+    if sys.platform == "win32":
+        config._use("default", "windows")
+    elif sys.platform == "linux":
+        config._use("default", "linux")
+    elif sys.platform == "darwin":
+        config.use("default", "macos")
+    else:
+        raise UnsupportedPlatformError(f"Platform {sys.platform} is not supported")
+
+    logging.config.fileConfig(config.logging_config)
+    logger = logging.getLogger(__name__)
+
+    logger.info("Starting macro. Press %s or ctrl+c to exit", config.exit_macro_hotkey)
+    logger.info("Using the delay of %s miliseconds", config.key_delay_in_miliseconds)
 
     window_title_fetcher = _select_correct_window_title_fetcher()
     logger.debug("Using fetcher: %s", window_title_fetcher)

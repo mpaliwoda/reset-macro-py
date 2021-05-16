@@ -1,16 +1,15 @@
 import logging
 
-from src import config
+from simpleconf import config
 from src.services.key_presses.keyboard_key_presser import KeyboardKeyPresser
 from src.world_generators.base_world_generator import BaseWorldGenerator
-
 
 logger = logging.getLogger(__name__)
 
 
 class RSGGenerator(BaseWorldGenerator):
     def __init__(self) -> None:
-        self.key_presser = KeyboardKeyPresser(delay_in_miliseconds=config.KEY_DELAY_IN_MILISECONDS)
+        self.key_presser = KeyboardKeyPresser(delay_in_miliseconds=config.key_delay_in_miliseconds)
 
     def single_player_menu(self) -> None:
         self.key_presser.press("tab")

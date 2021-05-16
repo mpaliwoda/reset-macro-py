@@ -3,6 +3,8 @@ import os
 import sys
 
 import keyboard
+from src.models.exceptions import UnsupportedVersionError
+from src.services.mc_window_manager import MCWindowManager
 from src.services.window_title.base_window_title_fetcher import BaseWindowTitleFetcher
 from src.services.world_generator_selector import WorldGeneratorSelector
 
@@ -20,49 +22,63 @@ def on_quit() -> None:
 
 
 def _clear_darwin_events() -> None:
-      keyboard._pressed_events.clear()
-      keyboard._physically_pressed_keys.clear()
-      keyboard._logically_pressed_keys.clear()
-      keyboard._hotkeys.clear()
+    keyboard._pressed_events.clear()
+    keyboard._physically_pressed_keys.clear()
+    keyboard._logically_pressed_keys.clear()
+    keyboard._hotkeys.clear()
 
 
 def on_new_rsg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> None:
-    window_title = window_title_fetcher.fetch_window_title()
+    mc_window_manager = MCWindowManager(window_title_fetcher)
 
-    if not _is_minecraft_focused(window_title):
+    if not mc_window_manager.is_minecraft_focused():
         return
 
-    world_generator_selector = WorldGeneratorSelector()
-    rsg_world_generator = world_generator_selector.select_rsg_world_generator(window_title)
-    rsg_world_generator.generate_world()
+    world_generator_selector = WorldGeneratorSelector(mc_window_manager)
 
-    if sys.platform == "darwin":
-        _clear_darwin_events()
+    try:
+        rsg_world_generator = world_generator_selector.select_rsg_world_generator()
+    except UnsupportedVersionError as unsupported_version_error:
+        logger.info("Looks like minecraft version you're trying to use is not supported: %s", unsupported_version_error)
+    else:
+        rsg_world_generator.generate_world()
+    finally:
+        if sys.platform == "darwin":
+            _clear_darwin_events()
 
 
 def on_new_ssg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> None:
-    window_title = window_title_fetcher.fetch_window_title()
+    mc_window_manager = MCWindowManager(window_title_fetcher)
 
-    if not _is_minecraft_focused(window_title):
+    if not mc_window_manager.is_minecraft_focused():
         return
 
-    world_generator_selector = WorldGeneratorSelector()
-    ssg_world_generator = world_generator_selector.select_ssg_world_generator(window_title)
-    ssg_world_generator.generate_world()
+    world_generator_selector = WorldGeneratorSelector(mc_window_manager)
 
-    if sys.platform == "darwin":
-        _clear_darwin_events()
+    try:
+        ssg_world_generator = world_generator_selector.select_ssg_world_generator()
+    except UnsupportedVersionError as unsupported_version_error:
+        logger.info("Looks like minecraft version you're trying to use is not supported: %s", unsupported_version_error)
+    else:
+        ssg_world_generator.generate_world()
+    finally:
+        if sys.platform == "darwin":
+            _clear_darwin_events()
 
 
 def on_world_exit(window_title_fetcher: BaseWindowTitleFetcher) -> None:
-    window_title = window_title_fetcher.fetch_window_title()
+    mc_window_manager = MCWindowManager(window_title_fetcher)
 
-    if not _is_minecraft_focused(window_title):
+    if not mc_window_manager.is_minecraft_focused():
         return
 
-    world_generator_selector = WorldGeneratorSelector()
-    world_exiter = world_generator_selector.select_world_exiter(window_title)
-    world_exiter.exit_world()
-
-    if sys.platform == "darwin":
-        _clear_darwin_events()
+    world_generator_selector = WorldGeneratorSelector(mc_window_manager)
+    try:
+        world_exiter = world_generator_selector.select_world_exiter()
+    except UnsupportedVersionError as unsupported_version_error:
+        logger.info("Looks like minecraft version you're trying to use is not supported: %s", unsupported_version_error)
+    else:
+        world_exiter.exit_world()
+    finally:
+        if sys.platform == "darwin":
+            _clear_darwin_events()
