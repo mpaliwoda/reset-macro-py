@@ -1,6 +1,5 @@
 import logging
 import os
-import sys
 
 import keyboard
 from src.models.exceptions import UnsupportedVersionError
@@ -11,17 +10,15 @@ from src.services.world_generator_selector import WorldGeneratorSelector
 logger = logging.getLogger(__name__)
 
 
-def _is_minecraft_focused(window_title: str) -> bool:
-    return "minecraft" in window_title.casefold()
-
-
 def on_quit() -> None:
     logger.info("Pressed exit, quitting now.")
     keyboard.unhook_all()
     os._exit(0)
 
 
-def _clear_darwin_events() -> None:
+def _clear_events() -> None:
+    # it's a dirty trick to circumvent the situation when the keyboard module for some reason thinks that the hotkey
+    # is being pressed and released continously in some cases - I know it's ugly but it works :(
     keyboard._pressed_events.clear()
     keyboard._physically_pressed_keys.clear()
     keyboard._logically_pressed_keys.clear()
@@ -43,8 +40,7 @@ def on_new_rsg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> No
     else:
         rsg_world_generator.generate_world()
     finally:
-        if sys.platform == "darwin":
-            _clear_darwin_events()
+        _clear_events()
 
 
 def on_new_ssg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> None:
@@ -62,8 +58,7 @@ def on_new_ssg_world_trigger(window_title_fetcher: BaseWindowTitleFetcher) -> No
     else:
         ssg_world_generator.generate_world()
     finally:
-        if sys.platform == "darwin":
-            _clear_darwin_events()
+        _clear_events()
 
 
 def on_world_exit(window_title_fetcher: BaseWindowTitleFetcher) -> None:
@@ -80,5 +75,4 @@ def on_world_exit(window_title_fetcher: BaseWindowTitleFetcher) -> None:
     else:
         world_exiter.exit_world()
     finally:
-        if sys.platform == "darwin":
-            _clear_darwin_events()
+        _clear_events()

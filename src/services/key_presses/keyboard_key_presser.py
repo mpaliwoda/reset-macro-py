@@ -1,10 +1,7 @@
-import logging
 import time
 
 import keyboard
 from src.services.key_presses.base_key_presser import BaseKeyPresser
-
-logger = logging.getLogger(__name__)
 
 
 class KeyboardKeyPresser(BaseKeyPresser):

@@ -12,7 +12,7 @@ class MCWindowManager:
         self.title_fetcher = window_title_fetcher
 
     def get_major_version(self) -> float:
-        if config.check_minecraft_window_before_running_hotkey:
+        if not config.check_minecraft_window_before_running_hotkey:
             return float(config.active_minecraft_version)
 
         match = self.MC_MAJOR_VERSION_REGEX.match(self._current_window_title())
