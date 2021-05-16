@@ -38,7 +38,7 @@ if __name__ == "__main__":
     elif sys.platform == "linux":
         config._use("default", "linux")
     elif sys.platform == "darwin":
-        config.use("default", "macos")
+        config._use("default", "macos")
     else:
         raise UnsupportedPlatformError(f"Platform {sys.platform} is not supported")
 
