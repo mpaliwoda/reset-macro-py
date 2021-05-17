@@ -47,7 +47,8 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 
 ## Optional steps
 
-* In order to change keybinds, change their value in `config.ini` under your platform section - the names should be self-explanatory.
+* In order to change hoykeys, change their value in `config.ini` under your platform section - the names should be self-explanatory.
+* To disable any of the hotkeys, remove its value in `config.ini` (the part after the `=` sign, so it looks something like this: `ssg_hotkey=`). The macro will warn about missing hotkeys in that case, to disable that change `warn_about_missing_hotkeys` value to `false`.
 * If the macro is too fast, change `key_delay_in_miliseconds`  in `config.ini` to something higher, but I wouldn't really recommend anything more than 120.
 
 *If you don't want to give Screen Recording permission on MacOS or macro doesn't work on Wayland:*
