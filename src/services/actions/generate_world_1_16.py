@@ -1,6 +1,5 @@
 import logging
 
-from simpleconf import config
 from src.services.actions.base_action import BaseAction
 from src.services.actions.mixins.world_creation_mixin_1_16 import WorldCreationMixin_1_16
 
