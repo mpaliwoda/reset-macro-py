@@ -2,45 +2,33 @@ import logging
 import os
 
 import keyboard
-from src.models.actions import Action
+from src.models.action_types import ActionType
 from src.models.exceptions import FailedToRetrieveMinecraftVersion, UnsupportedVersionError
-from src.services.action_performer_selector import ActionPerformerSelector
+from src.services.action_selector import ActionSelector
 from src.services.mc_window_managers.base_window_manager import BaseWindowManager
 
 logger = logging.getLogger(__name__)
 
 
-def on_quit_macro_trigger() -> None:
+def quit_macro() -> None:
     logger.info("Pressed exit, quitting now.")
     keyboard.unhook_all()
     os._exit(0)
 
 
-def on_new_rsg_world_trigger(window_manager: BaseWindowManager) -> None:
-    _perform_action(action=Action.GENERATE_RSG_WORLD, window_manager=window_manager)
-
-
-def on_new_ssg_world_trigger(window_manager: BaseWindowManager) -> None:
-    _perform_action(action=Action.GENERATE_SSG_WORLD, window_manager=window_manager)
-
-
-def on_world_exit_trigger(window_manager: BaseWindowManager) -> None:
-    _perform_action(action=Action.EXIT_WORLD, window_manager=window_manager)
-
-
-def _perform_action(action: Action, window_manager: BaseWindowManager) -> None:
+def perform_action(action_type: ActionType, window_manager: BaseWindowManager) -> None:
     if not window_manager.is_minecraft_focused():
         return
 
-    action_performer_selector = ActionPerformerSelector(window_manager)
+    action_selector = ActionSelector(window_manager)
     try:
-        action_performer = action_performer_selector.select_action_performer(action)
+        action = action_selector.select_action(action_type)
     except UnsupportedVersionError as unsupported_version_error:
         logger.info("Looks like minecraft version you're trying to use is not supported. %s", unsupported_version_error)
     except FailedToRetrieveMinecraftVersion as failed_to_retrieve_minecraft_version:
         logger.info("Looks like minecraft version could not be retrieved: %s", failed_to_retrieve_minecraft_version)
     else:
-        action_performer.perform_action()
+        action.perform()
     finally:
         _clear_events()
 

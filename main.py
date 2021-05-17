@@ -4,7 +4,7 @@ import sys
 import keyboard
 from simpleconf import config
 from src.models.exceptions import UnsupportedPlatformError
-from src.services import hotkey_registrator
+from src.services.hotkey_registrator import HotkeyRegistrator
 from src.services.mc_window_managers.dummy_window_manager import DummyWindowManager
 from src.services.mc_window_managers.base_window_manager import BaseWindowManager
 
@@ -52,5 +52,5 @@ if __name__ == "__main__":
     logger.debug("Using fetcher: %s", window_manager)
 
     logger.info("Registering hotkeys...")
-    hotkey_registrator.register_hotkeys(window_manager)
+    HotkeyRegistrator(window_manager).register_hotkeys()
     keyboard.wait()
