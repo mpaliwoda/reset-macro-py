@@ -29,7 +29,7 @@ Force perch hotkey is disabled by default - see _Optional steps_ on how to enabl
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
 * `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
-Force perch is not supported on Linux for now, as `keyboard` module makes problems with writing capital lettters.
+Force perch hotkey is disabled by default - see _Optional steps_ on how to enable it on your own risk.
 
 ## Default keybinds for MacOS
 
@@ -46,9 +46,10 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 
 1. Make sure you have Python 3.6+ and PIP installed - you can grab Python from [Python's site](https://www.python.org/) or install it through your platform's package manger of choice (probably Chocolatey for Windows, Homebrew for Mac and whatever your distribution's package manager is on Linux).
 2. If you have git installed and know how to use it, clone the repo to preferred destination. Otherwise, click the `Code` button on project's page and then `Download ZIP`. After that, unzip it to preferred desitnation.
-3. Navigate to unzipped/cloned folder in your terminal emulator and run `pip install --user -r requirements.txt` on Windows or `sudo pip3 install -r requirements.txt` on MacOS/Linux because of  inner workings of `keyboard` module. Can't really do anything about that, if you don't feel comfortable doing so and feel like you know a better solution to adding hotkeys, please make Pull Request or create Issue with resources pointing me in that direction.
-4. _(Additional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random. - If you don't feel comfortable allowing Screen Recording, see **Optional steps** to disable checking actively focused window. Unfortunately, Accessibility permissions is required and I can't do anything with that.
-5. Whlie in correct folder in your terminal emulator, run `python main.py` on Windows. On Linux and MacOS you need to run `sudo python3 main.py`, again because of  inner workings of `keyboard` module.
+3. _(Additional step on Linux)_ You need to install packages `scrot` and `python3-tk`. On Debian-based system the command for that is `sudo apt-get install -y scrot python3-tk`
+4. Navigate to unzipped/cloned folder in your terminal emulator and run `pip install --user -r requirements.txt` on Windows or `sudo pip3 install -r requirements.txt` on MacOS/Linux because of  inner workings of `keyboard` module. Can't really do anything about that, if you don't feel comfortable doing so and feel like you know a better solution to adding hotkeys, please make Pull Request or create Issue with resources pointing me in that direction.
+5. _(Additional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random. - If you don't feel comfortable allowing Screen Recording, see **Optional steps** to disable checking actively focused window. Unfortunately, Accessibility permissions is required and I can't do anything with that.
+6. Whlie in correct folder in your terminal emulator, run `python main.py` on Windows. On Linux and MacOS you need to run `sudo python3 main.py`, again because of  inner workings of `keyboard` module.
 7. Start using macro. 🤷
 
 ## Optional steps

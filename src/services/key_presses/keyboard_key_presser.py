@@ -1,14 +1,15 @@
 import time
+from typing import Optional
 
 import keyboard
 from src.services.key_presses.base_key_presser import BaseKeyPresser
 
 
 class KeyboardKeyPresser(BaseKeyPresser):
-    def press(self, key: str, times: int = 1) -> None:
+    def press(self, key: str, times: int = 1, delay_in_ms: Optional[int] = None) -> None:
         for _ in range(times):
             keyboard.send(key)
-            time.sleep(self.delay)
+            time.sleep(delay_in_ms if delay_in_ms is not None else self.standard_delay)
 
-    def write(self, sequence: str, instant: bool = True) -> None:
-        keyboard.write(sequence, delay=(0 if instant else self.delay))
+    def write(self, sequence: str, delay_in_ms: Optional[int] = None) -> None:
+        keyboard.write(sequence, delay=delay_in_ms if delay_in_ms is not None else self.standard_delay)

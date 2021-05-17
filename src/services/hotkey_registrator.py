@@ -1,12 +1,14 @@
 import logging
 import sys
+from typing import TYPE_CHECKING
 
 import keyboard
 from simpleconf import config
 from src.models.action_types import ActionType
-from src.models.game_state import GameState
 from src.services import trigger_executors
-from src.services.mc_window_managers.base_window_manager import BaseWindowManager
+
+if TYPE_CHECKING:
+    from src import Macro
 
 logger = logging.getLogger(__name__)
 
@@ -14,9 +16,8 @@ logger = logging.getLogger(__name__)
 class HotkeyRegistrator:
     FALLBACK_EXIT_MACRO_HOTKEY: str = "="
 
-    def __init__(self, game_state: GameState, window_manager: BaseWindowManager) -> None:
-        self.window_manager = window_manager
-        self.game_state = game_state
+    def __init__(self, macro: "Macro") -> None:
+        self.macro = macro
 
     def register_hotkeys(self) -> None:
         self._register_rsg_hotkey()
@@ -33,7 +34,7 @@ class HotkeyRegistrator:
         keyboard.add_hotkey(
             config.rsg_hotkey,
             trigger_executors.perform_action,
-            args=[ActionType.GENERATE_RSG_WORLD, self.game_state, self.window_manager],
+            args=[ActionType.GENERATE_RSG_WORLD, self.macro],
         )
         logger.info("Added %s for creating new RSG world", config.rsg_hotkey)
 
@@ -45,7 +46,7 @@ class HotkeyRegistrator:
         keyboard.add_hotkey(
             config.ssg_hotkey,
             trigger_executors.perform_action,
-            args=[ActionType.GENERATE_SSG_WORLD, self.game_state, self.window_manager],
+            args=[ActionType.GENERATE_SSG_WORLD, self.macro],
         )
         logger.info("Added %s for creating new SSG world", config.ssg_hotkey)
 
@@ -57,15 +58,11 @@ class HotkeyRegistrator:
         keyboard.add_hotkey(
             config.exit_world_hotkey,
             trigger_executors.perform_action,
-            args=[ActionType.EXIT_WORLD, self.game_state, self.window_manager],
+            args=[ActionType.EXIT_WORLD, self.macro],
         )
         logger.info("Added %s for exiting the world", config.exit_world_hotkey)
 
     def _register_force_perch_hotkey(self) -> None:
-        if sys.platform == "linux":
-            logger.warning("Forcing perch on Linux is not supported.")
-            return
-
         if not config.force_perch_hotkey:
             self._warn_about_missing_hotkey("Hotkey for forcing perch not specified.")
             return
@@ -73,7 +70,7 @@ class HotkeyRegistrator:
         keyboard.add_hotkey(
             config.force_perch_hotkey,
             trigger_executors.perform_action,
-            args=[ActionType.FORCE_PERCH, self.game_state, self.window_manager],
+            args=[ActionType.FORCE_PERCH, self.macro],
         )
         logger.info("Added %s for forcing perch", config.force_perch_hotkey)
 

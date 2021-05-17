@@ -1,14 +1,14 @@
+from simpleconf import config
+from src.models.game_state import GameState
 from src.services.key_presses.base_key_presser import BaseKeyPresser
 
 
 class WorldCreationMixin_1_16:
     key_presser: BaseKeyPresser
-    current_world_creation_screen_offset: int
+    game_state: GameState
 
     _SELECT_DIFFICULTY_OFFSET: int = 2
     _MORE_WORLD_OPTIONS_OFFSET: int = 6
-    _GAMEMODE_SELECTION_OFFSET: int = 1
-    _ALLOW_CHEATS_OFFSET: int = 3
 
     def single_player_menu(self) -> None:
         self.key_presser.press("tab")
@@ -19,19 +19,24 @@ class WorldCreationMixin_1_16:
         self.key_presser.press("enter")
 
     def start_new_world(self) -> None:
-        self.key_presser.press("tab", times=(7 - self._current_world_creation_screen_offset))
+        self.key_presser.press("tab", times=(7 - self.game_state.world_creation_screen_offset))
         self.key_presser.press("enter")
+        self.game_state.world_creation_screen_offset = 0
 
     def select_easy_diff(self) -> None:
         self.key_presser.press("tab", times=2)
         self.key_presser.press("enter", times=3)
-        self._current_world_creation_screen_offset = self._SELECT_DIFFICULTY_OFFSET
+        self.game_state.world_creation_screen_offset = self._SELECT_DIFFICULTY_OFFSET
 
     def more_world_options(self) -> None:
-        self.key_presser.press("tab", times=(6 - self._current_world_creation_screen_offset))
+        self.key_presser.press("tab", times=(6 - self.game_state.world_creation_screen_offset))
         self.key_presser.press("enter")
 
     def exit_more_world_options(self) -> None:
         self.key_presser.press("tab", times=5)
         self.key_presser.press("enter")
-        self._current_world_creation_screen_offset = self._MORE_WORLD_OPTIONS_OFFSET
+        self.game_state.world_creation_screen_offset = self._MORE_WORLD_OPTIONS_OFFSET
+
+    def input_seed(self, seed: str) -> None:
+        self.key_presser.press("tab", times=3)
+        self.key_presser.write(seed, delay_in_ms=(0 if config.write_text_instantly else None))

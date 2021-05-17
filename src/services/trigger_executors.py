@@ -1,12 +1,13 @@
 import logging
 import os
+from typing import TYPE_CHECKING
 
 import keyboard
-from src.models.game_state import GameState
 from src.models.action_types import ActionType
 from src.models.exceptions import FailedToRetrieveMinecraftVersion, UnsupportedVersionError
-from src.services.action_selector import ActionSelector
-from src.services.mc_window_managers.base_window_manager import BaseWindowManager
+
+if TYPE_CHECKING:
+    from src import Macro
 
 logger = logging.getLogger(__name__)
 
@@ -17,19 +18,19 @@ def quit_macro() -> None:
     os._exit(0)
 
 
-def perform_action(action_type: ActionType, game_state: GameState, window_manager: BaseWindowManager) -> None:
-    if not window_manager.is_minecraft_focused():
+def perform_action(action_type: ActionType, macro: "Macro") -> None:
+    if not macro.window_manager.is_minecraft_focused():
         return
 
-    action_selector = ActionSelector(game_state, window_manager)
+    major_version = macro.window_manager.major_version()
     try:
-        action = action_selector.select_action(action_type)
+        action_class = macro.action_selector.select_action(action_type, major_version)
     except UnsupportedVersionError as unsupported_version_error:
         logger.info("Looks like minecraft version you're trying to use is not supported. %s", unsupported_version_error)
     except FailedToRetrieveMinecraftVersion as failed_to_retrieve_minecraft_version:
         logger.info("Looks like minecraft version could not be retrieved: %s", failed_to_retrieve_minecraft_version)
     else:
-        action.perform()
+        action_class(key_presser=macro.key_presser, game_state=macro.game_state).perform()
     finally:
         _clear_events()
 
