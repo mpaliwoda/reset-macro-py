@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 class GenerateRSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
     def __init__(self, key_presser: BaseKeyPresser) -> None:
         self.key_presser = key_presser
+        self.current_world_creation_screen_offset = 0
 
     def perform(self) -> None:
         logger.info("Generating new 1.16 RSG world")
@@ -24,6 +25,7 @@ class GenerateSSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
 
     def __init__(self, key_presser: BaseKeyPresser) -> None:
         self.key_presser = key_presser
+        self.current_world_creation_screen_offset = 0
 
     def input_seed(self) -> None:
         self.key_presser.press("tab", times=3)
