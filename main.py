@@ -3,6 +3,7 @@ import sys
 
 import keyboard
 from simpleconf import config
+from src.models.game_state import GameState
 from src.models.exceptions import UnsupportedPlatformError
 from src.services.hotkey_registrator import HotkeyRegistrator
 from src.services.mc_window_managers.dummy_window_manager import DummyWindowManager
@@ -52,5 +53,6 @@ if __name__ == "__main__":
     logger.debug("Using fetcher: %s", window_manager)
 
     logger.info("Registering hotkeys...")
-    HotkeyRegistrator(window_manager).register_hotkeys()
+    game_state = GameState(opened_to_lan=False)
+    HotkeyRegistrator(game_state, window_manager).register_hotkeys()
     keyboard.wait()

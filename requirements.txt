@@ -1,3 +1,4 @@
+dataclasses==0.8; python_version <= "3.6"
 python-simpleconf==0.4.0
 python-xlib==0.29; sys_platform == "linux"
 pywin32==300; sys_platform == "win32"

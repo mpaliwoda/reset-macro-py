@@ -2,6 +2,7 @@ import logging
 import os
 
 import keyboard
+from src.models.game_state import GameState
 from src.models.action_types import ActionType
 from src.models.exceptions import FailedToRetrieveMinecraftVersion, UnsupportedVersionError
 from src.services.action_selector import ActionSelector
@@ -16,11 +17,11 @@ def quit_macro() -> None:
     os._exit(0)
 
 
-def perform_action(action_type: ActionType, window_manager: BaseWindowManager) -> None:
+def perform_action(action_type: ActionType, game_state: GameState, window_manager: BaseWindowManager) -> None:
     if not window_manager.is_minecraft_focused():
         return
 
-    action_selector = ActionSelector(window_manager)
+    action_selector = ActionSelector(game_state, window_manager)
     try:
         action = action_selector.select_action(action_type)
     except UnsupportedVersionError as unsupported_version_error:

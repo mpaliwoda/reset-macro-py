@@ -1,5 +1,6 @@
 import logging
 
+from src.models.game_state import GameState
 from src.services.actions.base_action import BaseAction
 from src.services.actions.mixins.world_creation_mixin_1_14 import WorldCreationMixin_1_14
 from src.services.key_presses.base_key_presser import BaseKeyPresser
@@ -8,7 +9,8 @@ logger = logging.getLogger(__name__)
 
 
 class GenerateRSGWorld_1_14(BaseAction, WorldCreationMixin_1_14):
-    def __init__(self, key_presser: BaseKeyPresser) -> None:
+    def __init__(self, game_state: GameState, key_presser: BaseKeyPresser) -> None:
+        self.game_state = game_state
         self.key_presser = key_presser
 
     def perform(self) -> None:

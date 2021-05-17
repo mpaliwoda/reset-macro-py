@@ -1,14 +1,17 @@
 import logging
 
-from src.services.actions.mixins.world_creation_mixin_1_16 import WorldCreationMixin_1_16
+from simpleconf import config
+from src.models.game_state import GameState
 from src.services.actions.base_action import BaseAction
+from src.services.actions.mixins.world_creation_mixin_1_16 import WorldCreationMixin_1_16
 from src.services.key_presses.base_key_presser import BaseKeyPresser
 
 logger = logging.getLogger(__name__)
 
 
 class GenerateRSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
-    def __init__(self, key_presser: BaseKeyPresser) -> None:
+    def __init__(self, game_state: GameState, key_presser: BaseKeyPresser) -> None:
+        self.game_state = game_state
         self.key_presser = key_presser
         self.current_world_creation_screen_offset = 0
 
@@ -23,13 +26,14 @@ class GenerateRSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
 class GenerateSSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
     SEED: str = "2483313382402348964"
 
-    def __init__(self, key_presser: BaseKeyPresser) -> None:
+    def __init__(self, game_state: GameState, key_presser: BaseKeyPresser) -> None:
+        self.game_state = game_state
         self.key_presser = key_presser
         self.current_world_creation_screen_offset = 0
 
     def input_seed(self) -> None:
         self.key_presser.press("tab", times=3)
-        self.key_presser.write(self.SEED)
+        self.key_presser.write(self.SEED, config.write_text_instantly)
 
     def perform(self) -> None:
         logger.info("Generating new 1.16 SSG world")
