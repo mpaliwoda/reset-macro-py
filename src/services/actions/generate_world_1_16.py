@@ -37,7 +37,7 @@ class GenerateSSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
 
 class GenerateFSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
     def input_seed(self) -> None:
-        self.key_presser.press_key_combination(self._paste_from_clipboard_hotkey())
+        self.key_presser.press_key_combination(*self._paste_from_clipboard_hotkey())
 
     def perform(self) -> None:
         logger.info("Generating new 1.16 FSG world using seed from clipboard")

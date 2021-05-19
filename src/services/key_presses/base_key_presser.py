@@ -1,5 +1,5 @@
 import abc
-from typing import Optional, Tuple
+from typing import Optional
 
 MILISECONDS_IN_SECOND: int = 1000
 
@@ -17,7 +17,7 @@ class BaseKeyPresser(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def press_key_combination(self, *keys: Tuple[str, ...]) -> None:
+    def press_key_combination(self, *keys: str) -> None:
         pass
 
     def set_standard_delay(self, delay_in_ms: int) -> None:
