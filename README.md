@@ -10,6 +10,7 @@ Currently covered:
 
 * 1.16 Random seed glitchess
 * 1.16 Set seed glitchless
+* 1.16 Filtered seed glitchless (using seed from clipboard)
 * 1.15 Random seed glitchless
 * 1.14 Random seed glitchless
 
@@ -17,6 +18,7 @@ Currently covered:
 
 * `Ctrl + m` creates new RSG world, works for 1.14+
 * `Ctrl + k` creates new SSG world, works only in 1.16
+* `Ctrl + o` creates new FSG world using seed from clipboard, works only in 1.16
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
 * `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
@@ -26,6 +28,7 @@ Force perch hotkey is disabled by default - see _Optional steps_ on how to enabl
 
 * `Ctrl + m` creates new RSG world, works for 1.14+
 * `Ctrl + k` creates new SSG world, works only in 1.16
+* `Ctrl + o` creates new FSG world using seed from clipboard, works only in 1.16
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
 * `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
@@ -35,6 +38,7 @@ Force perch hotkey is disabled by default - see _Optional steps_ on how to enabl
 
 * `Cmd + u` creates new RSG world, works for 1.14+
 * `Cmd + k` creates new SSG world, works only in 1.16
+* `Cmd + o` creates new FSG world using seed from clipboard, works only in 1.16
 * `Cmd + n` exits current singleplayer world, works for 1.14+
 * `Cmd + l` exits macro gracefully, although good old `Ctrl + c` works as well
 
