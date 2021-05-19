@@ -1,5 +1,6 @@
 from AppKit import NSWorkspace
-from Quartz import CGWindowListCopyWindowInfo, kCGWindowListOptionOnScreenOnly, kCGNullWindowID
+from Quartz import CGWindowListCopyWindowInfo, kCGNullWindowID, kCGWindowListOptionOnScreenOnly
+
 from src.services.window_managers.base_window_manager import WindowTitleManager
 
 

@@ -1,0 +1,7 @@
+[flake8]
+max-line-length = 120
+max-complexity = 11
+format = "pylint"
+show-source = true
+statistics = true
+exclude = "__pycache__"
