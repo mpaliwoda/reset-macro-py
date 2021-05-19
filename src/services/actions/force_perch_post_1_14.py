@@ -1,9 +1,9 @@
 import logging
 
 from simpleconf import config
+
 from src.services.actions.base_action import BaseAction
 from src.services.actions.mixins.pause_menu_mixin_post_1_14 import PauseMenuMixinPost_1_14
-
 
 logger = logging.getLogger(__name__)
 

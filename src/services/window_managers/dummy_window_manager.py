@@ -1,5 +1,5 @@
 from simpleconf import config
-from src.services.mc_window_managers.base_window_manager import BaseWindowManager
+from src.services.window_managers.base_window_manager import BaseWindowManager
 
 
 class DummyWindowManager(BaseWindowManager):

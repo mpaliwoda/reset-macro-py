@@ -1,6 +1,7 @@
 from AppKit import NSWorkspace
-from Quartz import CGWindowListCopyWindowInfo, kCGWindowListOptionOnScreenOnly, kCGNullWindowID
-from src.services.mc_window_managers.base_window_manager import WindowTitleManager
+from Quartz import CGWindowListCopyWindowInfo, kCGNullWindowID, kCGWindowListOptionOnScreenOnly
+
+from src.services.window_managers.base_window_manager import WindowTitleManager
 
 
 class DarwinWindowManager(WindowTitleManager):

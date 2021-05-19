@@ -1,0 +1,4 @@
+flake8==3.9.2
+mypy==0.812
+black==21.5b1
+isort==5.7.0

@@ -1,6 +1,8 @@
-import pyautogui
-from src.services.key_presses.base_key_presser import BaseKeyPresser
 from typing import Optional
+
+import pyautogui
+
+from src.services.key_presses.base_key_presser import BaseKeyPresser
 
 
 class PyautoguiKeyPresser(BaseKeyPresser):
