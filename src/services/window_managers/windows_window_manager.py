@@ -1,5 +1,5 @@
 import win32gui
-from src.services.mc_window_managers.base_window_manager import WindowTitleManager
+from src.services.window_managers.base_window_manager import WindowTitleManager
 
 
 class WindowsWindowManager(WindowTitleManager):
