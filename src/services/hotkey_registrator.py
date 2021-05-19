@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 import keyboard
 from simpleconf import config
+
 from src.models.action_types import ActionType
 from src.services import trigger_executors
 
@@ -21,6 +22,7 @@ class HotkeyRegistrator:
     def register_hotkeys(self) -> None:
         self._register_rsg_hotkey()
         self._register_ssg_hotkey()
+        self._register_fsg_hotkey()
         self._register_exit_world_hotkey()
         self._register_force_perch_hotkey()
         self._register_exit_macro_hotkey()
@@ -48,6 +50,18 @@ class HotkeyRegistrator:
             args=[ActionType.GENERATE_SSG_WORLD, self.macro],
         )
         logger.info("Added %s for creating new SSG world", config.ssg_hotkey)
+
+    def _register_fsg_hotkey(self) -> None:
+        if not config.ssg_hotkey:
+            self._warn_about_missing_hotkey("Hotkey for FSG world generation not specified.")
+            return
+
+        keyboard.add_hotkey(
+            config.fsg_hotkey,
+            trigger_executors.perform_action,
+            args=[ActionType.GENERATE_FSG_WORLD, self.macro],
+        )
+        logger.info("Added %s for creating new FSG world", config.fsg_hotkey)
 
     def _register_exit_world_hotkey(self) -> None:
         if not config.rsg_hotkey:
