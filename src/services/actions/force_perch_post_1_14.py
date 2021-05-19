@@ -13,7 +13,7 @@ class ForcePerchPost_1_14(BaseAction, PauseMenuMixinPost_1_14):
 
     def enter_force_perch_command(self) -> None:
         self.key_presser.press(config.enter_chat_key)
-        self.key_presser.write(self.FORCE_PERCH_COMMAND, delay_in_ms=(0 if config.write_text_instantly else None))
+        self.key_presser.write(self.FORCE_PERCH_COMMAND, delay_in_ms=0)
         self.key_presser.press("enter")
 
     def perform(self) -> None:
