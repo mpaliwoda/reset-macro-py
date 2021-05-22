@@ -51,5 +51,5 @@ class GenerateFSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
         self.start_new_world()
 
     def _paste_from_clipboard_hotkey(self) -> Tuple[str, ...]:
-        base = "ctrl" if sys.platform != "darwin" else "cmd"
+        base = "ctrl" if sys.platform != "darwin" else "command"
         return base, "v"
