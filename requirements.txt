@@ -3,7 +3,9 @@ dataclasses==0.8; python_version <= "3.6"
 python-simpleconf==0.4.0
 pyautogui==0.9.52; sys_platform == "linux" or sys_platform == "darwin"
 python-xlib==0.29; sys_platform == "linux"
-pywin32==300; sys_platform == "win32"
+pywin32==225; sys_platform == "win32"
 AppKit==0.2.8; sys_platform == "darwin"
+pyobjc==7.2; sys_platform == "darwin"
+pyobjc-core==7.2; sys_platform == "darwin"
 
 keyboard==0.13.5

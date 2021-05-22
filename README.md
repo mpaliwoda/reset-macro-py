@@ -2,7 +2,7 @@
 
 ## Description
 
-This is as-multiplatform-as-I-could-make-it Python reset macro for Minecraft speedrunning.Should fully support Windows, Linux with X11 (tested on elementaryOS Hera) and MacOS (tested on Big Sur). Could work on Wayland, but I din't even test it - see additional steps to give it a try. Written for Python 3.6+.
+This is as-multiplatform-as-I-could-make-it Python reset macro for Minecraft speedrunning.Should fully support Windows, Linux with X11 (tested on elementaryOS Hera) and macOS (tested on Big Sur). Could work on Wayland, but I din't even test it - see additional steps to give it a try. Written for Python 3.6+.
 
 ## Versions/Categories covered
 
@@ -48,7 +48,20 @@ FSG generation is disabled on Linux by default. You can set it and try it yourse
 
 Force perch hotkey is disabled by default - see _Optional steps_ on how to enable it on your own risk.
 
+
 ## Installation instructions
+
+### Using zip from release page
+
+Download latest zipped release corresponding to your platform from [releases page](https://github.com/mpaliwoda/reset-macro-py/releases). Unzip it to desired destination folder.
+
+* _On Windows_: navigate to unzipped folder and double click `main.exe`
+* _On Linux and macOS_: navigate to unzipped folder in your preferred terminal emulator and run `sudo ./main`
+* _(Additional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random. - If you don't feel comfortable allowing Screen Recording, see **Optional steps** to disable checking actively focused window. Unfortunately, Accessibility permissions is required and I can't do anything with that.
+* See _Optional steps_ below for additional info.
+
+
+### Using source code downloaded from git
 
 _Since the macro is written for Python, some steps are troublesome now, might try to correctly package it later_.
 
@@ -59,6 +72,18 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 5. _(Additional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random. - If you don't feel comfortable allowing Screen Recording, see **Optional steps** to disable checking actively focused window. Unfortunately, Accessibility permissions is required and I can't do anything with that.
 6. Whlie in correct folder in your terminal emulator, run `python main.py` on Windows. On Linux and MacOS you need to run `sudo python3 main.py`, again because of  inner workings of `keyboard` module.
 7. Start using macro. 🤷
+
+### Building from source
+
+_Note: If you want to build macro from source code, I assume you have at least some experience with programming_
+
+* Fetch the source code from git
+* Run `pip install -r requirements.txt -r requirements-dev.txt`
+* Make sure you have C compiler installed, on Windows `nuitka` will download it automatically, not sure about Linux and macOS since I've already had gcc installed.
+* Make sure you have develeopment/framework-enabled version of Python installed. On macOS I installed using pyenv with command `PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.9.5`, on Linux I used `python3-dev` package.
+* You might need to install `chrpath` , `scrot` and `python3-tk` on Linux
+* Run build script corresponding to your platform, debug wherever needed.
+
 
 ## Optional steps
 
