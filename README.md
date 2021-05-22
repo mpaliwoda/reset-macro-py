@@ -10,6 +10,7 @@ Currently covered:
 
 * 1.16 Random seed glitchess
 * 1.16 Set seed glitchless
+* 1.16 Filtered seed glitchless (using seed from clipboard)
 * 1.15 Random seed glitchless
 * 1.14 Random seed glitchless
 
@@ -17,6 +18,7 @@ Currently covered:
 
 * `Ctrl + m` creates new RSG world, works for 1.14+
 * `Ctrl + k` creates new SSG world, works only in 1.16
+* `Ctrl + o` creates new FSG world using seed from clipboard, works only in 1.16
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
 * `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
@@ -26,6 +28,7 @@ Force perch hotkey is disabled by default - see _Optional steps_ on how to enabl
 
 * `Ctrl + m` creates new RSG world, works for 1.14+
 * `Ctrl + k` creates new SSG world, works only in 1.16
+* `Ctrl + o` creates new FSG world using seed from clipboard, works only in 1.16
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
 * `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
@@ -35,6 +38,7 @@ Force perch hotkey is disabled by default - see _Optional steps_ on how to enabl
 
 * `Cmd + u` creates new RSG world, works for 1.14+
 * `Cmd + k` creates new SSG world, works only in 1.16
+* `Cmd + o` creates new FSG world using seed from clipboard, works only in 1.16
 * `Cmd + n` exits current singleplayer world, works for 1.14+
 * `Cmd + l` exits macro gracefully, although good old `Ctrl + c` works as well
 
@@ -57,7 +61,6 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 * In order to change hoykeys, change their value in `config.ini` under your platform section - the names should be self-explanatory.
 * To disable any of the hotkeys, remove its value in `config.ini` (the part after the `=` sign, so it looks something like this: `ssg_hotkey=`). The macro will warn about missing hotkeys in that case, to disable that change `warn_about_missing_hotkeys` value to `false`.
 * If the macro is too fast, change `key_delay_in_miliseconds`  in `config.ini` to something higher, but I wouldn't really recommend anything more than 120.
-* If you want delay when writing seeds/commands, set `write_text_instantly` in `config.ini` to `false`.
 * If your default open chat key is different than `t`, change `enter_chat_key` in `config.ini `accordingly
 
 *If you don't want to give Screen Recording permission on MacOS or macro doesn't work on Wayland:*

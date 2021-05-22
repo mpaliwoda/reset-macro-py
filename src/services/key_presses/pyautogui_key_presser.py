@@ -11,3 +11,6 @@ class PyautoguiKeyPresser(BaseKeyPresser):
 
     def write(self, sequence: str, delay_in_ms: Optional[int] = None) -> None:
         pyautogui.write(sequence, interval=(delay_in_ms if delay_in_ms is not None else self.standard_delay))
+
+    def press_key_combination(self, *keys: str) -> None:
+        pyautogui.hotkey(*keys)

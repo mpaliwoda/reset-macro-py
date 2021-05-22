@@ -1,4 +1,3 @@
-from simpleconf import config
 from src.models.game_state import GameState
 from src.services.key_presses.base_key_presser import BaseKeyPresser
 
@@ -37,6 +36,5 @@ class WorldCreationMixin_1_16:
         self.key_presser.press("enter")
         self.game_state.world_creation_screen_offset = self._MORE_WORLD_OPTIONS_OFFSET
 
-    def input_seed(self, seed: str) -> None:
+    def set_seed_field(self) -> None:
         self.key_presser.press("tab", times=3)
-        self.key_presser.write(seed, delay_in_ms=(0 if config.write_text_instantly else None))

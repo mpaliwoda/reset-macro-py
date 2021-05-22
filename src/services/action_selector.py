@@ -7,7 +7,7 @@ from src.services.actions.dummy_action import DummyAction
 from src.services.actions.exit_world_post_1_14 import ExitWorldPost_1_14
 from src.services.actions.force_perch_post_1_14 import ForcePerchPost_1_14
 from src.services.actions.generate_world_1_14 import GenerateRSGWorld_1_14
-from src.services.actions.generate_world_1_16 import GenerateRSGWorld_1_16, GenerateSSGWorld_1_16
+from src.services.actions.generate_world_1_16 import GenerateFSGWorld_1_16, GenerateRSGWorld_1_16, GenerateSSGWorld_1_16
 
 
 class ActionSelector:
@@ -16,6 +16,8 @@ class ActionSelector:
             return self._select_rsg_world_generator(major_version)
         elif action_type == ActionType.GENERATE_SSG_WORLD:
             return self._select_ssg_world_generator(major_version)
+        elif action_type == ActionType.GENERATE_FSG_WORLD:
+            return self._select_fsg_world_generator(major_version)
         elif action_type == ActionType.EXIT_WORLD:
             return self._select_world_exiter(major_version)
         elif action_type == ActionType.FORCE_PERCH:
@@ -33,6 +35,11 @@ class ActionSelector:
         if major_version == 1.16:
             return GenerateSSGWorld_1_16
         raise UnsupportedVersionError(f"SSG world generation for version {major_version} is not supported")
+
+    def _select_fsg_world_generator(self, major_version: float) -> Type[BaseAction]:
+        if major_version == 1.16:
+            return GenerateFSGWorld_1_16
+        raise UnsupportedVersionError(f"FSG world generation for version {major_version} is not supported")
 
     def _select_world_exiter(self, major_version: float) -> Type[BaseAction]:
         if major_version >= 1.14:
