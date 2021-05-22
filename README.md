@@ -28,11 +28,11 @@ Force perch hotkey is disabled by default - see _Optional steps_ on how to enabl
 
 * `Ctrl + m` creates new RSG world, works for 1.14+
 * `Ctrl + k` creates new SSG world, works only in 1.16
-* `Ctrl + o` creates new FSG world using seed from clipboard, works only in 1.16
 * `Ctrl + n` exits current singleplayer world, works for 1.14+
 * `Ctrl + /` exits macro gracefully, although good old `Ctrl + c` works as well
 
 Force perch hotkey is disabled by default - see _Optional steps_ on how to enable it on your own risk.
+FSG generation is disabled on Linux by default. You can set it and try it yourself, but pasting seed from clipboard is affected by [MC-122477](https://bugs.mojang.com/browse/MC-122477), causing `ctrl+v` sometimes to input `v` after the pasted contents.
 
 ## Default keybinds for MacOS
 
