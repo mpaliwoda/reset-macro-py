@@ -1,10 +1,9 @@
+pyobjc-framework-Quartz==7.2; sys_platform == "darwin"
 dataclasses==0.8; python_version <= "3.6"
 python-simpleconf==0.4.0
 pyautogui==0.9.52; sys_platform == "linux" or sys_platform == "darwin"
 python-xlib==0.29; sys_platform == "linux"
 pywin32==300; sys_platform == "win32"
 AppKit==0.2.8; sys_platform == "darwin"
-pyobjc-framework-Quartz==7.2; sys_platform == "darwin"
 
-keyboard==0.13.5; sys_platform == "win32" or sys_platform == "linux"
-git+https://github.com/boppreh/keyboard@233fd11434f769fa61624aaf97fc91ba7a60ef3f ; sys_platform == "darwin"
+keyboard==0.13.5

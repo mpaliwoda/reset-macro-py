@@ -14,6 +14,10 @@ Currently covered:
 * 1.15 Random seed glitchless
 * 1.14 Random seed glitchless
 
+## Additional features
+
+* Renaming RSG worlds based on txt file world counter.
+
 ## Default keybinds for Windows
 
 * `Ctrl + m` creates new RSG world, works for 1.14+
@@ -44,7 +48,7 @@ FSG generation is disabled on Linux by default. You can set it and try it yourse
 
 Force perch hotkey is disabled by default - see _Optional steps_ on how to enable it on your own risk.
 
-## Installation instruction
+## Installation instructions
 
 _Since the macro is written for Python, some steps are troublesome now, might try to correctly package it later_.
 
@@ -63,6 +67,7 @@ _Since the macro is written for Python, some steps are troublesome now, might tr
 * If the macro is too fast, change `key_delay_in_miliseconds`  in `config.ini` to something higher, but I wouldn't really recommend anything more than 120.
 * If your default open chat key is different than `t`, change `enter_chat_key` in `config.ini `accordingly
 * In order to change difficulty macro chooses for new world, set `difficulty` in `config.ini` to desired value. Allowed values are: `easy`, `normal`, `hard`.
+* In order to disable naming worlds based on txt file world counter, set `name_worlds` in `config.ini` to `false`. To set world counter value to your current count (e.g. from livesplit), change the number in file corresponding to your MC version (`world_counter_1_14.txt` for 1.14 and 1.15, `world_counter_1_16.txt` for 1.16)
 
 *If you don't want to give Screen Recording permission on MacOS or macro doesn't work on Wayland:*
 
