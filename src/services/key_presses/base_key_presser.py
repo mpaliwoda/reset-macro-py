@@ -5,8 +5,8 @@ MILISECONDS_IN_SECOND: int = 1000
 
 
 class BaseKeyPresser(abc.ABC):
-    def __init__(self, delay_in_ms: int = 0) -> None:
-        self.standard_delay = delay_in_ms / MILISECONDS_IN_SECOND
+    def __init__(self) -> None:
+        self.standard_delay: float = 0.0
 
     def set_standard_delay(self, delay_in_ms: int) -> None:
         self.standard_delay = delay_in_ms / MILISECONDS_IN_SECOND

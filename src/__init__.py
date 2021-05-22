@@ -3,6 +3,7 @@ import sys
 
 import keyboard
 from simpleconf import config
+
 from src.models.game_state import GameState
 from src.services.action_selector import ActionSelector
 from src.services.hotkey_registrator import HotkeyRegistrator
@@ -19,6 +20,7 @@ class Macro:
         self.action_selector = ActionSelector()
         self.window_manager = WindowManagerSelector().select_window_manager()
         self.key_presser = KeyPresserSelector().select_key_presser()
+        self.key_presser.set_standard_delay(config.key_delay_in_miliseconds)
 
     def run(self) -> None:
         hotkey_registrator = HotkeyRegistrator(self)
