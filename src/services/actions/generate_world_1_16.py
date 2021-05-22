@@ -13,7 +13,7 @@ class GenerateRSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
         logger.info("Generating new 1.16 RSG world")
         self.single_player_menu()
         self.create_new_world_menu()
-        self.select_easy_diff()
+        self.select_difficulty()
         self.start_new_world()
 
 
@@ -27,7 +27,7 @@ class GenerateSSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
         logger.info("Generating new 1.16 SSG world")
         self.single_player_menu()
         self.create_new_world_menu()
-        self.select_easy_diff()
+        self.select_difficulty()
         self.more_world_options()
         self.set_seed_field()
         self.input_seed()
@@ -43,7 +43,7 @@ class GenerateFSGWorld_1_16(BaseAction, WorldCreationMixin_1_16):
         logger.info("Generating new 1.16 FSG world using seed from clipboard")
         self.single_player_menu()
         self.create_new_world_menu()
-        self.select_easy_diff()
+        self.select_difficulty()
         self.more_world_options()
         self.set_seed_field()
         self.input_seed()
