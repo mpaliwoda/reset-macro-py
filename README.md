@@ -56,29 +56,29 @@ Force perch hotkey is disabled by default - see _Optional steps_ on how to enabl
 Download latest zipped release corresponding to your platform from [releases page](https://github.com/mpaliwoda/reset-macro-py/releases). Unzip it to desired destination folder.
 
 * _On Windows_: navigate to unzipped folder and double click `main.exe`
-* _On Linux and macOS_: navigate to unzipped folder in your preferred terminal emulator and run `sudo ./main`
-* _(Additional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random. - If you don't feel comfortable allowing Screen Recording, see **Optional steps** to disable checking actively focused window. Unfortunately, Accessibility permissions is required and I can't do anything with that.
-* See _Optional steps_ below for additional info.
+* _On Linux_: navigate to unzipped folder in your preferred terminal emulator and run `chmod +x ./main` and then `sudo ./main`
+* _On macOS_: see below to run the macro from source code 
 
 
 ### Using source code downloaded from git
 
 _Since the macro is written for Python, some steps are troublesome now, might try to correctly package it later_.
 
-1. Make sure you have Python 3.6+ and PIP installed - you can grab Python from [Python's site](https://www.python.org/) or install it through your platform's package manger of choice (probably Chocolatey for Windows, Homebrew for Mac and whatever your distribution's package manager is on Linux).
-2. If you have git installed and know how to use it, clone the repo to preferred destination. Otherwise, click the `Code` button on project's page and then `Download ZIP`. After that, unzip it to preferred desitnation.
-3. _(Additional step on Linux)_ You need to install packages `scrot` and `python3-tk`. On Debian-based system the command for that is `sudo apt-get install -y scrot python3-tk`
-4. Navigate to unzipped/cloned folder in your terminal emulator and run `pip install --user -r requirements.txt` on Windows or `sudo pip3 install -r requirements.txt` on MacOS/Linux because of  inner workings of `keyboard` module. Can't really do anything about that, if you don't feel comfortable doing so and feel like you know a better solution to adding hotkeys, please make Pull Request or create Issue with resources pointing me in that direction.
-5. _(Additional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random. - If you don't feel comfortable allowing Screen Recording, see **Optional steps** to disable checking actively focused window. Unfortunately, Accessibility permissions is required and I can't do anything with that.
-6. Whlie in correct folder in your terminal emulator, run `python main.py` on Windows. On Linux and MacOS you need to run `sudo python3 main.py`, again because of  inner workings of `keyboard` module.
-7. Start using macro. 🤷
+1. Make sure you have Python 3.6+ and PIP installed - you can grab Python from [Python's site](https://www.python.org/) or install it through your platform's package manger of choice (probably Chocolatey for Windows, Homebrew for Mac and whatever your distribution's package manager is on Linux). _On macOS: install homebrew from https://brew.sh/ and run `/opt/homebrew/bin install cairo`_
+3. If you have git installed and know how to use it, clone the repo to preferred destination. Otherwise, click the `Code` button on project's page and then `Download ZIP`. After that, unzip it to preferred desitnation.
+4. _(Additional step on Linux)_ You need to install packages `scrot` and `python3-tk`. On Debian-based system the command for that is `sudo apt-get install -y scrot python3-tk`
+5. Navigate to unzipped/cloned folder in your terminal emulator and run `pip install --user -r requirements.txt` on Windows or `sudo pip3 install -r requirements.txt` on MacOS/Linux because of  inner workings of `keyboard` module. Can't really do anything about that, if you don't feel comfortable doing so and feel like you know a better solution to adding hotkeys, please make Pull Request or create Issue with resources pointing me in that direction.
+6. _(Additional step for MacOS)_ open `Security and Privacy` and give Accessibility and Screen Recording permissions to your terminal emulator - accessibility permission is for keybinds to work, screen recording to detect wheter Minecraft is the window in focus in order not to run macro somewhere random. - If you don't feel comfortable allowing Screen Recording, see **Optional steps** to disable checking actively focused window. Unfortunately, Accessibility permissions is required and I can't do anything with that.
+7. Whlie in correct folder in your terminal emulator, run `python main.py` on Windows. On Linux and MacOS you need to run `sudo python3 main.py`, again because of  inner workings of `keyboard` module.
+8. Start using macro. 🤷
 
 ### Building from source
 
 _Note: If you want to build macro from source code, I assume you have at least some experience with programming_
 
 * Fetch the source code from git
-* Run `pip install -r requirements.txt -r requirements-dev.txt`
+* On macOS: install homebrew from https://brew.sh/ and run `/opt/homebrew/bin install cairo`
+* Run `pip3 install -r requirements.txt -r requirements-dev.txt`
 * Make sure you have C compiler installed, on Windows `nuitka` will download it automatically, not sure about Linux and macOS since I've already had gcc installed.
 * Make sure you have develeopment/framework-enabled version of Python installed. On macOS I installed using pyenv with command `PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.9.5`, on Linux I used `python3-dev` package.
 * You might need to install `chrpath` , `scrot` and `python3-tk` on Linux
